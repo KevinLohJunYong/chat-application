@@ -13,7 +13,7 @@ public class Server {
         try {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                ClientHandler clientThread = new ClientHandler(clientSocket, clients);
+                ClientHandler clientThread = new ClientHandler(clientSocket);
                 clients.add(clientThread);
                 clientThread.start();
             }
@@ -24,16 +24,12 @@ public class Server {
 
     static class ClientHandler extends Thread {
         private Socket socket;
-        private PrintWriter out;
         private BufferedReader in;
-        private ArrayList<ClientHandler> clients;
         private String clientName;
 
-        public ClientHandler(Socket socket, ArrayList<ClientHandler> clients) throws IOException {
+        public ClientHandler(Socket socket) throws IOException {
             this.socket = socket;
-            this.clients = clients;
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
             this.clientName = in.readLine();
             broadcastMessage(clientName + " has joined");
         }
@@ -56,9 +52,6 @@ public class Server {
 
         private void broadcastMessage(String message) {
             System.out.println(message);
-            for (ClientHandler client : clients) {
-                client.out.println(message); 
-            }
         }
     }
 }
