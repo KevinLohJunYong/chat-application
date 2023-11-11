@@ -21,9 +21,9 @@ public class Client {
     public void run() {
         new Thread(() -> {
             try {
-                String serverResponse;
-                while ((serverResponse = in.readLine()) != null) {
-                    System.out.println(serverResponse);
+                String msg;
+                while ((msg = in.readLine()) != null) {
+                    System.out.println(msg);
                 }
             } catch (IOException e) {
                 System.out.println(e.getMessage());
