@@ -1,12 +1,13 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
     private static final int PORT = 5050;
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
     private static Set<String> userNames = Collections.synchronizedSet(new HashSet<>());
-    private static Map<String,ClientHandler> clientNameToClientHandlerMap = new HashMap<>();
+    private static Map<String,ClientHandler> clientNameToClientHandlerMap = new ConcurrentHashMap<>();
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(PORT);
         System.out.println("Server started on port: " + PORT);
