@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 public class MessageService {
     public static void broadcastMessage(String message,ArrayList<ClientHandler> clients) {
@@ -16,5 +17,11 @@ public class MessageService {
         else {
             receipientClientHandler.printMessage(sender+": "+msg);
         }
-    }    
+    }   
+    public static void listAllUsersMessage(String requester, Map<String,ClientHandler> clientNameToClientHandlerMap) {
+        ClientHandler requesterClientHandler = UserManager.getClientHandler(requester, clientNameToClientHandlerMap);
+        Set<String> userNames = clientNameToClientHandlerMap.keySet();
+        String responseMsg = "Users currently in the chat : " + userNames.toString();
+        requesterClientHandler.printMessage(responseMsg);
+    } 
 }

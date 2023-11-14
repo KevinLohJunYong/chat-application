@@ -47,16 +47,26 @@ public class ClientHandler extends Thread {
             try {
                 String input;
                 while ((input = in.readLine()) != null) {
-                    UserInputHandler.handleUserInput(input, clientName,
+                    boolean userContinue = UserInputHandler.handleUserInput(input, clientName,
                     clientNameToClientHandlerMap,clients);
+                    if(!userContinue) {
+                        printMessage("Goodbye!");
+                        break;
+                    }
                 }
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             } finally {
                 try {
                     UserManager.removeUser(clientName,userNames,clientNameToClientHandlerMap);
+                    clients.remove(this);
+                    in.close();
+                    out.close();
                     socket.close();
+                    System.out.println(clientName + " has left the chat");
+                    MessageService.broadcastMessage(clientName + " has left the chat.", clients);
                 } catch (IOException e) {
+                    System.out.println("Error with client " + clientName + ": " + e.getMessage());
                 }
             }
         }
