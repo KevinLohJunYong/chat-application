@@ -8,7 +8,7 @@ public class Client {
     private String clientName;
 
     public Client(String serverAddress) throws IOException {
-        Socket socket = new Socket(serverAddress, 5050);
+        Socket socket = new Socket(serverAddress, 5000);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
         stdIn = new BufferedReader(new InputStreamReader(System.in));
