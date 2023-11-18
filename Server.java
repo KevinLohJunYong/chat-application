@@ -6,13 +6,14 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
     private static final int START_PORT = 5050;
     private static final int NUM_SERVER_INSTANCES = 3;
-    private static ArrayList<ClientHandler> clients = new ArrayList<>();
+    private static CopyOnWriteArrayList<ClientHandler> clients = new CopyOnWriteArrayList<>();
     private static Set<String> userNames = Collections.synchronizedSet(new HashSet<>());
     private static ConcurrentHashMap<String, ClientHandler> clientNameToClientHandlerMap = new ConcurrentHashMap<>();
 
