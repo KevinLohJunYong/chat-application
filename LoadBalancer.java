@@ -27,7 +27,6 @@ public class LoadBalancer {
             System.out.println("exception: " + e.getMessage());
         }
         finally {
-            System.out.println("Load balancer has closed");
             loadBalancerSocket.close();
         }
     }
@@ -44,7 +43,6 @@ public class LoadBalancer {
 
     private static void redirectRequest(Socket clientSocket, int serverPort) {
         try {
-            System.out.println("Redirected to server port: " + serverPort);
             Socket serverSocket = new Socket("localhost", serverPort);
             new Thread(new SocketPipe(clientSocket.getInputStream(), serverSocket.getOutputStream())).start();
             new Thread(new SocketPipe(serverSocket.getInputStream(), clientSocket.getOutputStream())).start();
