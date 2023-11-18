@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ClientHandler extends Thread {
         private Socket socket;
@@ -8,11 +9,11 @@ public class ClientHandler extends Thread {
         private PrintWriter out;
         private String clientName;
         private Set<String> userNames;
-        private ArrayList<ClientHandler> clients;
+        private CopyOnWriteArrayList<ClientHandler> clients;
         private Map<String,ClientHandler> clientNameToClientHandlerMap;
 
         public ClientHandler(Socket socket,Set<String> userNames,
-        ArrayList<ClientHandler> clients,
+        CopyOnWriteArrayList<ClientHandler> clients,
         Map<String,ClientHandler> clientNameToClientHandlerMap
         ) throws IOException {
             this.socket = socket;

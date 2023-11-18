@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class UserInputHandler {
     public static boolean handleUserInput(String input,String clientName,Map<String,ClientHandler> clientNameToClientHandlerMap, 
-    ArrayList<ClientHandler> clients) {
+    CopyOnWriteArrayList<ClientHandler> clients) {
         if(isPrivateMsg(input)) {
             String recipient = getRecipientFromPrivateMsg(input);
             String msg = getMsg(input);

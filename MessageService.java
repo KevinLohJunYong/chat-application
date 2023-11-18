@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MessageService {
-    public static void broadcastMessage(String message,ArrayList<ClientHandler> clients) {
+    public static void broadcastMessage(String message,CopyOnWriteArrayList<ClientHandler> clients) {
         for (ClientHandler client : clients) {
             client.printMessage(message);
         }
